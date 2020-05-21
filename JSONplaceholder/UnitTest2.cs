@@ -37,13 +37,15 @@ namespace JSONplaceholder
             // Executing request to server 
             IRestResponse restResponse = restClient.Execute(restRequest);
 
+            //Validating status code
+            int statusCode = (int)restResponse.StatusCode;
+            Assert.AreEqual(201, statusCode, " Status code is not 201 ");
+
             // Extracting output data from received response
             Console.WriteLine(restResponse.Content);            
             JObject jObjectResponse = JObject.Parse(restResponse.Content);
-            int statusCode = (int)restResponse.StatusCode;
-
+            
             // Validating data
-            Assert.AreEqual(201, statusCode, " Status code is not 201 ");
             Assert.AreEqual(nameValue, jObjectResponse.GetValue("name"), " name value is not correct ");
             Assert.AreEqual(usernameValue, jObjectResponse.GetValue("username"), " username value is not correct ");
             Assert.AreEqual(emailValue, jObjectResponse.GetValue("email"), " email value is not correct ");
