@@ -18,7 +18,7 @@ namespace JSONplaceholder
 
             // Creating resource path and threshold value in milliseconds 
             string resourcePath = baseURL + "/photos";
-            long threshold = 100;
+            long threshold = 10; //long threshold = 100;
 
             // Creating request to get data from server
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(resourcePath);
@@ -34,7 +34,6 @@ namespace JSONplaceholder
             // Validating response time
             Assert.IsTrue(elapsedMilliseconds < threshold, " Response time " + elapsedMilliseconds + " milliseconds exceeded threshold " + threshold + " milliseconds ");
         }
-
     }
 }
 

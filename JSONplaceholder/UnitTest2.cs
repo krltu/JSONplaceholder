@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using System;
 
 namespace JSONplaceholder
 {
@@ -36,17 +37,17 @@ namespace JSONplaceholder
             // Executing request to server 
             IRestResponse restResponse = restClient.Execute(restRequest);
 
-            // Extracting output data from received response           
-            var jsonObjectResponse = JObject.Parse(restResponse.Content);
+            // Extracting output data from received response
+            Console.WriteLine(restResponse.Content);            
+            JObject jObjectResponse = JObject.Parse(restResponse.Content);
             int statusCode = (int)restResponse.StatusCode;
 
             // Validating data
             Assert.AreEqual(201, statusCode, " Status code is not 201 ");
-            Assert.AreEqual(nameValue, jsonObjectResponse.GetValue("name"), " name value is not correct ");
-            Assert.AreEqual(usernameValue, jsonObjectResponse.GetValue("username"), " username value is not correct ");
-            Assert.AreEqual(emailValue, jsonObjectResponse.GetValue("email"), " email value is not correct ");
+            Assert.AreEqual(nameValue, jObjectResponse.GetValue("name"), " name value is not correct ");
+            Assert.AreEqual(usernameValue, jObjectResponse.GetValue("username"), " username value is not correct ");
+            Assert.AreEqual(emailValue, jObjectResponse.GetValue("email"), " email value is not correct ");
         }
-
     }
 }
 

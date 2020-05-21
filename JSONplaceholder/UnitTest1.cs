@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using System;
 
 namespace JSONplaceholder
 {
@@ -29,13 +30,13 @@ namespace JSONplaceholder
             IRestResponse restResponse = restClient.Execute(restRequest);
 
             // Extracting output data from received response          
-            JArray jsonArrayResponse = JArray.Parse(restResponse.Content);
+            Console.WriteLine(restResponse.Content);
+            JArray jArrayResponse = JArray.Parse(restResponse.Content);
             int statusCode = (int)restResponse.StatusCode;
 
             // Validating data
             Assert.AreEqual(200, statusCode, " Status code is not 200 ");
-            Assert.IsTrue(jsonArrayResponse.Count != 0, " Post with this title was not found ");
-            
+            Assert.IsTrue(jArrayResponse.Count != 0, " Post with this title was not found ");            
         }
     }
 }
